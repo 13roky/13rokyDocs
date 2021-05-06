@@ -1,6 +1,6 @@
 module.exports = {
-    title: 'vuepress文档',
-    description: 'vuepress文档描述',
+    title: '13roky\'s JavaDoc',
+    description: 'Java路途漫漫,用于记录Java学习过程中学习到的知识',
     base: '/Vuepress_Java/', // 这里写你的仓库名称
     head: [
         ['link', { rel: 'shortcut icon', type: "image/x-icon", href: `/jyjwebdocs/favicon.ico` }]
@@ -11,19 +11,20 @@ module.exports = {
 
         nav: [
             { text: '首页', link: '/' },
+            { text: 'Github', link: 'https://github.com/13roky' },
+            { text: 'MyBlog', link: 'http://cnblog.13roky.tk' },
             {
                 text: '常用链接', items: [
-                    { text: 'Baidu', link: 'http://www.baidu.com' },
-                    { text: 'Myblog', link: 'http://baidu.com' },
-
+                    { text: 'Baidu', link: 'https://baidu.com' },
+                    { text: 'Google', link: 'https://google.com' },
                 ],
             },
 
             {
-                text: '我的文档',
+                text: '更多文档',
                 items: [
                     { text: 'test', link: '/test/SecondSidebar/test1.html' },
-                    { text: 'java', link: '/test/FirstSidebar/Java多线程.html' },
+                    { text: 'java', link: '/FirstSidebar/Java多线程.html' },
                 ]
             }
         ],
@@ -37,7 +38,7 @@ module.exports = {
         // 设置侧边栏内容
 
         sidebar: {
-            '/test/FirstSidebar/': [
+            '/FirstSidebar/': [
                 {
                     title: 'Java多线程',
                     children: ['Java多线程', 'Java异常']

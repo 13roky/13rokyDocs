@@ -1,5 +1,4 @@
 # 异常
-[toc]
 
 # 1. 异常的体系结构
 
@@ -7,7 +6,7 @@
 
 **异常的体系结构**
 
-![Java异常的体系结构](https://img-blog.csdn.net/20160331115514210)
+![Java异常的体系结构](https://i.vgy.me/hIfFtK.png)
 
 - **Throwable**：是java中所有异常和错误的超类,其两个子类为 Error(错误) 和 Exception(异常)
     - **Error**： 是程序中无法处理的错误，表示运行应用程序中出现了严重的错误。此类错误一般表示代码运行时JVM出现问题。通常有Virtual MachineError（虚拟机运行错误）、NoClassDefFoundError（类定义错误）等。比如说当jvm耗完可用内存时，将出现OutOfMemoryError。此类错误发生时，JVM将终止线程。非代码性错误。因此，当此类错误发生时，应用不应该去处理此类错误。
