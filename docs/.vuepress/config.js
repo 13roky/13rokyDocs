@@ -7,10 +7,11 @@ module.exports = {
     ], //这里配置你的网页头部信息等
 
     themeConfig: {
-        displayAllHeaders: false, // 默认值：false
+        displayAllHeaders: true, // 默认值：false
 
         nav: [
             { text: '首页', link: '/' },
+            { text: 'CodeServer', link: 'http://code.13roky.tk' },
             { text: 'Github', link: 'https://github.com/13roky' },
             { text: 'MyBlog', link: 'http://cnblog.13roky.tk' },
             {

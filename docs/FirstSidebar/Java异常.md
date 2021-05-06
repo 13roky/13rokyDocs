@@ -1,6 +1,6 @@
-# 异常
-
-# 1. 异常的体系结构
+# Java异常
+[[toc]]
+## 1. 异常的体系结构
 
 **定义**：异常就是有异于常态，和正常情况不一样，有错误出现。在java中，将程序执行过程中的不正常的情况称之为异常，开发过程中的语法错误和逻辑错误不是异常，发生异常时java会阻止当前方法或作用域的情况。
 
@@ -18,21 +18,21 @@
 - 编译时异常：程序在编译时发生的异常（javac 源文件名.java）
 - 运行时异常: 程序在运行时发生的异常（java 字节码文件名）
 
-# 2. 常见的异常
+## 2. 常见的异常
 
-## 2.1. 运行时异常
+### 2.1. 运行时异常
 
 - NullPointerException (空指针异常)：指针指向的对象为空（null）
 - ArrayIndexOutOfBoundException (数组角标越界异常) StringIndexOutOfBoundException (字符串越界异常) ...
 - ClassCastException (类型转换异常)
 
-## 2.2. 编译时异常 (编译时异常必须进行处理否则无法运行)
+### 2.2. 编译时异常 (编译时异常必须进行处理否则无法运行)
 
 - IOException
     - FileNotFoundException
 - ClassNotFoundException
 
-## 2.3. 常见异常的运行Demo
+### 2.3. 常见异常的运行Demo
 
 ```java
 package com.broky.exception.commonException;
@@ -107,15 +107,15 @@ public class CommonEx {
 
 ```
 
-# 3. 异常的抓抛模型原理
+## 3. 异常的抓抛模型原理
 
 - **异常的抛出**：如果程序在运行过程中执行某段代码时发生了异常，那么系统（JVM）将会根据异常的类型，在异常代码处创建对应的异常类型的对象并抛出，抛出给程序的调用者。一旦抛出对象以后,其后的代码不再运行,程序终止.  
 异常的抛出分为：① 系统向外抛出异常  ② 手动向外抛出异常（throw）
 - **异常的抓取**：异常的抓取可以理解为异常的处理方式, 取有 try-catch-finally 和 throws 两种方式（详情见异常的处理部分）
 
-# 4. 异常的处理
+## 4. 异常的处理
 
-## 4.1. try - catch - finally
+### 4.1. try - catch - finally
 
 - 将可能出现异常的代码放到try{}中, 运行时, 如果代码发成了异常的话,就会生成一个对应的异常类的对象. 
 
@@ -152,7 +152,7 @@ public class TryCatchFinally {
 ```
 
 
-## 4.2. throws + 异常类型
+### 4.2. throws + 异常类型
 
 - throws 一般用于方法中可能存在异常时, 需要将异常情况向方法之上的层级抛出, 由抛出方法的上一级来解决这个问题, 如果方法的上一级无法解决的会就会再将异常向上抛出, 最终会抛给main方法.   这样一来main方法中调用了这个方法的时候,就需要解决这个可能出现的异常.   
 当然main方法也可以不解决异常, 将异常往上抛出给java虚拟机, 如果java虚拟机也无法解决的话,那么java虚拟机就over了
@@ -191,7 +191,7 @@ public class ThrowsEx {
 }
 ```
 
-# 5. 重写方法异常抛出的规则
+## 5. 重写方法异常抛出的规则
 
 1. 子类重写的方法抛出的异常类型不大于父类被重写的方法抛出的异常类型  
 
@@ -231,13 +231,13 @@ class SubClass extends SuperClass {
 }
 ```
 
-# 6. 开发中如何选择使用try-catch-finally 还是throws?
+## 6. 开发中如何选择使用try-catch-finally 还是throws?
 - 如果分类中被重写的方法没有throws方式处理异常,则子类重写的方法也不能使用throws,意味着如果子类重写的方法中有异常,必须使用tyr-catch-finally方式处理.
 - 执行的方法中,先后又调用了另外的几个方法,这几个方法是递进关系执行的.我们建议这几个方法使用throws的方式处理.而执行的方法a可以考虑使用try-catch-finally方式进行处理.  
 因为如果在a方法要调用d方法时,如果在b方法内try-catch,当b方法异常时,并不会给方法a返回所需要的数据.因此最好使用throws将异常集合到一块再处理.
 - 注意: try-catch和throws再方法中不要同时使用,因为只要使用try-catch就已经将异常处理掉了,再throws没有任何意义.
 
-# 7. 手动抛出异常 throw
+## 7. 手动抛出异常 throw
 
 手动抛出的异常有两种, 分别为**运行时异常**和**编译时异常**.
 
@@ -298,7 +298,7 @@ public class ThrowEx {
 
 ```
 
-# 8. 自定义异常类
+## 8. 自定义异常类
 
 1. 继承现有的异常结构：RuntimeExceptiona（不用处理）、Exception（需要处理）
 2. 提供全局常量：serialVersionUID
@@ -325,8 +325,8 @@ public class MyException extends RuntimeException{
     }
 }
 ```
-# 9. 异常处理练习题
-## 9.1. 判断以下代码的输出内容
+## 9. 异常处理练习题
+### 9.1. 判断以下代码的输出内容
 
 ```java
 package com.broky.exception.practice;
@@ -378,7 +378,7 @@ public class ExceptionTest {
 5. atch (Exception e) {System.out.println(e.getMessage());}
 6. methodB();
 
-## 9.2. 异常处理综合练习
+### 9.2. 异常处理综合练习
 编写应用程序 EcmDef java,接收命令行的两个参数,要求不能输入负数,计算两数相除对数据类型不一致( Number FormatException)、
 缺少命令行参数(ArraylndexOutofBounds Exception、除0( Arithmetic EXception)及输入负数( EcDef自定义的异常)进行异常处理。
 
