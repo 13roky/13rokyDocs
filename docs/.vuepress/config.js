@@ -1,7 +1,7 @@
 module.exports = {
     title: 'vuepress文档',
     description: 'vuepress文档描述',
-    base: '/vuepress/', // 这里写你的仓库名称
+    base: '/Vuepress_Java/', // 这里写你的仓库名称
     head: [
         ['link', { rel: 'shortcut icon', type: "image/x-icon", href: `/jyjwebdocs/favicon.ico` }]
     ], //这里配置你的网页头部信息等
