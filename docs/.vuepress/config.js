@@ -6,6 +6,7 @@ module.exports = {
         ['link', { rel: 'shortcut icon', type: "image/x-icon", href: `/jyjwebdocs/favicon.ico` }]
     ], //这里配置你的网页头部信息等
 
+
     themeConfig: {
         //侧边栏展开所有标题
         displayAllHeaders: false, // 默认值：false
@@ -54,5 +55,11 @@ module.exports = {
                 }
             ],
         }
-    }
+    },
+
+    plugins:[
+        [
+            '@vuepress/back-to-top'
+        ],
+    ]
 }
