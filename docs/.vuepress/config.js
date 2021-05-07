@@ -7,7 +7,8 @@ module.exports = {
     ], //这里配置你的网页头部信息等
 
     themeConfig: {
-        displayAllHeaders: true, // 默认值：false
+        //侧边栏展开所有标题
+        displayAllHeaders: false, // 默认值：false
 
         nav: [
             { text: '首页', link: '/' },
