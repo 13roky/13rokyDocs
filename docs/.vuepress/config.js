@@ -43,8 +43,13 @@ module.exports = {
         sidebar: {
             '/FirstSidebar/': [
                 {
-                    title: 'Java多线程',
-                    children: ['Java多线程', 'Java异常']
+                    title:'Java基础',
+                    children:['Java异常']
+                },
+
+                {
+                    title: 'Java进阶',
+                    children: ['Java多线程','Java常用类']
                 }
             ],
 
