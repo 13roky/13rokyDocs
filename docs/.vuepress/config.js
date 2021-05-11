@@ -64,7 +64,27 @@ module.exports = {
 
     plugins:[
         [
-            '@vuepress/back-to-top'
+            '@vuepress/back-to-top',
         ],
+        [
+            'fulltext-search',
+        ],
+        [
+            'vuepress-plugin-right-anchor',
+            {
+                showDepth: 1,
+                ignore: [
+                  '/',
+                  '/api/'
+                  // 更多...
+                ],
+                expand: {
+                  default: false,
+                  trigger: 'hover'
+                },
+                customClass: 'your-customClass',
+                disableGlobalUI: false,
+              }
+        ]
     ]
 }

@@ -10,6 +10,11 @@
   },
   "author": "",
   "license": "ISC",
-  "devDependencies": {},
+  "devDependencies": {
+    "@vuepress/plugin-back-to-top": "^1.8.2",
+    "vuepress": "^1.8.2",
+    "vuepress-plugin-fulltext-search": "^2.2.0",
+    "vuepress-plugin-right-anchor": "^0.4.9"
+  },
   "dependencies": {}
 }
