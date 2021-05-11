@@ -9,7 +9,7 @@ module.exports = {
 
     themeConfig: {
         //侧边栏展开所有标题
-        displayAllHeaders: false, // 默认值：false
+        displayAllHeaders: true, // 默认值：false
 
         nav: [
             { text: '首页', link: '/' },
