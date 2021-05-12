@@ -1490,3 +1490,155 @@ public class JDK8DateTimeTest {
 - TemporalAdjuster : 时间校正器。有时我们可能需要获取例如：将日期调整 到“下一个工作日”等操作。
 - TemporalAdjusters : 该类通过静态方法 (firstDayOfXxx()/lastDayOfXxx()/nextXxx())提供了大量的常用 TemporalAdjuster 的实现。
 
+### 4.5 Comparable 接口 自然排序
+
+> 用于对象与对象的比较, Comparable属于自然排序
+
+**说明：**
+
+​	Java中的对象, 正常情况下, 只能进行比较:==或!= 不能使用>或<
+
+​	但是在开发场景中, 我们需要对多个对象进行排序, 言外之意, 就需要比较对象的大小
+
+​	使用两个接口中的任何一个来实现: Comparable 或 Comparator
+
+**Comparable 接口的使用举例 :**
+
+    1. 像 String, 包装类等实现了 Comparable 接口, 重写了 `compareTo(obj)` 方法, 给出了比较两个对象
+    2. 像 String, 包装类重写了`compareTo()`方法以后, 进行了从小到大的排列
+    3. 重写 `compareTo(obj)` 的规则:
+       如果当前对象 this 等于形参对象 obj, 则返回为零
+       如果当前对象 this 小于形参对象 obj, 则返回负整数
+       如果当前对象 this 大于形参对象 obj, 则返回正整数
+    4. **对于自定义类来说**, 如果需要排序, 我们可以让自定义类实现 Comparable 接口, 重写 `compareTo(obj)` 方法并在 `compareTO(obj)` 方法中指明如何排序
+
+**Demo：**
+
+```java
+package com.broky.commonClass;
+
+import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
+
+/**
+ * 1) 说明: Java中的对象, 正常情况下, 只能进行比较:==或!= 不能使用>或<
+ *          但是在开发场景中, 我们需要对多个对象进行排序, 言外之意, 就需要比较对象的大小
+ *          如何实现? 使用两个接口中的任何一个: Comparable 或 Comparator
+ * 2) Comparable 接口的使用
+ *
+ * @author 13roky
+ * @date 2021-05-12 22:15
+ */
+public class CompareTest {
+    /*
+    Comparable 接口的使用举例: 自然排序
+    1. 像 String, 包装类等实现了 Comparable 接口, 重写了 compareTo(obj) 方法, 给出了比较两个对象
+    2. 像 String, 包装类重写了compareTo()方法以后,进行了从小到大的排列
+    3. 重写 compareTo(obj) 的规则:
+        如果当前对象 this 等于形参对象 obj, 则返回为零
+        如果当前对象 this 小于形参对象 obj, 则返回负整数
+        如果当前对象 this 大于形参对象 obj, 则返回正整数
+    4. 对于自定义类来说, 如果需要排序, 我们可以让自定义类实现 Comparable 接口, 重写compareTo(obj) 方法
+        在 compareTO(obj) 方法中知名如何排序
+     */
+    @Test
+    public void test01(){
+        String[] arr = new String[]{"aa","cc","kk","mm","gg","jj","dd"};
+        Arrays.sort(arr);
+        System.out.println(Arrays.toString(arr));
+    }
+
+    @Test
+    public void test02() {
+        Goods[] arr = new Goods[4];
+        arr[0] = new Goods("lenovoMouse",34);
+        arr[1] = new Goods("dellMouse",43);
+        arr[2] = new Goods("xiaomiMouse",12);
+        arr[3] = new Goods("huaweiMouse",65);
+        arr[3] = new Goods("MicroSoftiMouse",12);
+		
+        // 根据arr所对应类的CompareTo方法排序
+        Arrays.sort(arr);
+        System.out.println(Arrays.toString(arr));
+    }
+
+}
+```
+
+```java
+package com.broky.commonClass;
+
+/**
+ * 商品类 实现Comparable方法
+ *
+ * @author 13roky
+ * @date 2021-05-12 22:42
+ */
+public class Goods implements Comparable {
+    private String name;
+    private double price;
+
+    public Goods() {
+    }
+
+    public Goods(String name, double price) {
+        this.name = name;
+        this.price = price;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return "Goods{" + "name='" + name + '\'' + ", price=" + price + '}';
+    }
+
+    // 指明商品比较大小的方式：按照价格从低到高排序，再按照产品名称从第到高排序
+    @Override
+    public int compareTo(Object o) {
+        if (o instanceof Goods) {
+            // 方式一
+            Goods goods = (Goods) o;
+            if (this.price > goods.price) {
+                return 1;
+            } else if (this.price < goods.price) {
+                return -1;
+            } else {
+                // 字符串类型的本身就有 compareTo 方法
+                return this.name.compareTo(goods.name);
+                // return -this.name.compareTo(goods.name); 加了负号变成了从高到低排
+            }
+            // 方式二
+            //return Double.compare(this.price,goods.price);
+
+        }
+        throw new RuntimeException("传入的数据类型不一致");
+    }
+}
+```
+
+
+
+### 4.6 Comparator 接口 定制排序
+
+> 根据定制的规则进行比较, Comparator属于定制排序
+
+**说明 :**
+
+1. 当元素的类型没有实现java.lang.Comparable接口而又不方便修改代码， 或者实现了java.lang.Comparable接口的排序规则不适合当前的操作，那么可以考虑使用 Comparator 的对象来排序，强行对多个对象进行整体排序的比较。
+
