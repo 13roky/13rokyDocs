@@ -4,7 +4,7 @@
 
 ## 1. String类
 
-###  1.1. String的特性
+###  1.1 String的特性
 
 - **String类：**代表字符串。Java程序中的所有字符串字面值（如“abc”）都作为此类的实例实现。
 
@@ -16,7 +16,7 @@
 
 ![](https://i.vgy.me/NnITJv.png)
 
-### 1.2. String字面量赋值的内存理解
+### 1.2 String字面量赋值的内存理解
 
 字面量赋值是直接在常量池中赋值的
 
@@ -95,7 +95,7 @@ public class StringTest {
 
 ![](https://i.vgy.me/XHCsa9.png)
 
-### 1.3. String new方式赋值的内存理解
+### 1.3 String new方式赋值的内存理解
 
 **Demo:**
 
@@ -162,7 +162,7 @@ new的结构是存在于堆中的，`比如 String s3 = new String("javaEE");`
 
 ![](https://i.vgy.me/FVZVIz.png)
 
-### 1.4. String 拼接字面量和变量的方式赋值
+### 1.4 String 拼接字面量和变量的方式赋值
 
 **Demo：**
 
@@ -247,7 +247,7 @@ public class StringValueChangeEx {
 }
 ```
 
-### 1.5. String类常用方法
+### 1.5 String类常用方法
 
 1. `int Length()`:返回字符的长度: return value.Length
 2. `char charAt(int index)`:返回某索引处的字return vaLue[index]
@@ -478,7 +478,7 @@ public class CommonMethod {
 
 
 
-### 1.6. String与其它类型的转换
+### 1.6 String与其它类型的转换
 
 **demo：**
 
@@ -575,7 +575,7 @@ public class StringChange {
 
 
 
-### 1.7. 常见算法题目
+### 1.7 常见算法题目
 
 1. 模拟一个trim方法，去除字符串两端的空格。
 2. 将一个字符串进行反转。将字符串中间指定部分进行反转。比如“abcdefg”反转为“abfedcg”。
@@ -733,7 +733,7 @@ public class Algorithms {
 
 
 
-### 2.1. String、StringBuffer、StringBuilder 三者的异同
+### 2.1 String、StringBuffer、StringBuilder 三者的异同
 
 - String：不可变的字符序列，底层使用char[]进行存储
 - StringBuffer：可变的字符序列，线程安全的，效率低，底层使用char[]进行存储
@@ -757,7 +757,7 @@ public class Algorithms {
 
 
 
-### 2.2. StringBuffer 类的常用方法
+### 2.2 StringBuffer 类的常用方法
 
 - StringBuffer append(xx):提供了很多的 append()方法,用于进行字符拼接
 - StringBuffer delete( int start, int end):删除指定位置的内容，本身发生改变，并返回值。
@@ -836,7 +836,7 @@ public class StringBufferBuilderTest {
 
 
 
-### 2.3. String、StringBuffer、StringBuilder 三者的效率 
+### 2.3 String、StringBuffer、StringBuilder 三者的效率 
 
 **效率：**StringBuilder > StringBuffer > String
 
@@ -887,13 +887,13 @@ import org.junit.jupiter.api.Test;
 
 
 
-### 3.1. java.lang.System 类
+### 3.1 java.lang.System 类
 
 **System** 类提供的 **public static long currentTimeMillis()** 用来返回当前时间与1970年1月1日0时0分0秒之间以毫秒为单位的时间差。
 
 
 
-### 3.2. java.util.Date 和 java.sql.Date 类
+### 3.2 java.util.Date 和 java.sql.Date 类
 
 1. 两个构造器的使用
     > 构造器一：Date()：创建一个对应当前时间的Date对象
@@ -980,9 +980,44 @@ public class DateTimeTest {
 }
 ```
 
+**注意：**
+
+使用Data的构造器，设置时间会存在 **偏移量** 的问题
+
+**Demo：**
+
+```java
+package com.broky.commonClass;
+
+import org.junit.jupiter.api.Test;
+
+import java.util.Date;
+
+/**
+ * JDK8 之前的日期和时间的 api 测试
+ *
+ * @author 13roky
+ * @date 2021-05-08 9:15
+ */
+public class DateTimeTest {
+
+    // Date中的偏移量
+    @Test
+    public void test01() {
+        /*
+        由于构造方法存在一个偏移量，年份是从1990年开始，月份是从0开始所以构造时应该减去偏移量
+         */
+        Date date1 = new Date(2020, 9, 8);
+        System.out.println(date1);  // Fri Oct 08 00:00:00 CST 3920
+        date1 = new Date(2020 - 1900, 9 - 1, 8);
+        System.out.println(date1);  // Tue Sep 08 00:00:00 CST 2020
+    }
+}
+```
 
 
-### 3.3. SimpleDateFormat 类
+
+### 3.3 SimpleDateFormat 类
 
 SimpleDateFormat 是用来 格式化 Date 类中 时间格式的 和 对格式进行解析成 Date 的类
 
@@ -1107,7 +1142,7 @@ import java.util.Date;
 
 
 
-### 3.4. Calendar 类
+### 3.4 Calendar 类
 
 - calendar类是一个抽象类，是可变的
 
@@ -1182,7 +1217,7 @@ public class DateTimeTest2 {
 
 
 
-### 3.5. JDK8 之前时间日期api的一些问题
+### 3.5 JDK8 之前时间日期api的一些问题
 
 如果我们可以跟别人说:“我们在1502643933071见晚了!”那么就再简单不过了。但是我们希望时间与量夜和四季有关,于是事情就变复杂了。JDK10中包含了个 java util. Date类,但是它的大多数方法已经在JDK11引入 Calendar类之后被弃用而 Calendar并不比Date好多少。它们面临的问题是：
 
@@ -1201,6 +1236,157 @@ public class DateTimeTest2 {
 ## 4. JDK8 中新的时间日期 api
 
 - 第三次引入的API是成功的，并且Java8中引入的 java. time API 已经纠正了过去的缺陷，将来很长一段时间内它都会为我们服务。
-- Java8 吸收了**Joda-Time**的精华，以一个新的开始为Java创建优秀的AP新的 java. time中包含了所有关于本地日期( LocalDate)、本地时间( LocalTime)、本地日期时间( LocalDate Time)、时区( Zoned Date Time和持续时间( Duration)的类。历史悠久的Date类新增了 tolnstant()方法，用于把Date转换成新的表示形式。这些新增的本地化时间口期 API 大大简化了日期时间和本地化的管理。
+- Java8 吸收了**Joda-Time**的精华，以一个新的开始为Java创建优秀的AP新的 java. time中包含了所有关于本地**日期( LocalDate)**、**本地时间( LocalTime)**、**本地日期时间( LocalDate Time)**、**时区( Zoned Date Time)**和**持续时间( Duration)**的类。历史悠久的Date类新增了 tolnstant()方法，用于把Date转换成新的表示形式。这些新增的本地化时间口期 API 大大简化了日期时间和本地化的管理。
+- 在JDK8 之前joda-time是作为jar包的形式导入项目使用的，在jdk8 的时候官方将其引入.
 
-- 在JDK8 之前joda-time是作为jar包的形式导入项目使用的，在jdk8 的时候官方将其引入
+
+
+### 4.1 LocalDate、LocalTime、LocalDateTime 类的使用
+
+**实例化：**
+
+- 实例化方式一：使用静态方法 `now() / now(zoneld zone)` 获取当前的日期时间
+- 实例化方式二：使用静态方法 `of()`自定义时间，无 Date 中偏移量的问题
+
+
+
+**方法 :** 
+
+- `now() / now(zoneld zone)`
+- `of()`
+
+- `getXxx()` 获取相关属性
+- `withXxxx()` 设置相关属性
+- `plusXxx()`  在现有基础上加上指定数据
+- `minusXxx()`  在现有基础上减去指定数据
+
+
+
+**说明 :** 
+
+- 三个类都具有不可变性
+- LocalDateTime 相较于 LocalDate , LocalTime 使用频率更高
+- 类似于 jdk8 之前的 Calendar 类
+
+**Demo：**
+
+```java
+package com.broky.commonClass;
+
+import org.junit.jupiter.api.Test;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+
+/**
+ * jdk 8 中的时间日期 api
+ *
+ * @author 13roky
+ * @date 2021-05-10 7:05
+ */
+public class JDK8DateTimeTest {
+
+    /*
+    LocalDate、LocalTime、LocalDateTime 类的使用:
+
+     */
+
+    @Test
+    public void test01(){
+        // 实例化方式一：使用静态方法 now() / now(zoneld zone) 获取当前的日期时间
+        LocalDateTime localDateTime = LocalDateTime.now();
+        LocalDate localDate = LocalDate.now();
+        LocalTime localTime = LocalTime.now();
+
+        System.out.println(localDateTime);
+        System.out.println(localDate);
+        System.out.println(localTime);
+
+        // 实例化方式二：of() 可以自定义时间，无 Date 中偏移量的问题
+
+        LocalDateTime localDateTime1 = LocalDateTime.of(2020, 10, 1, 4, 23, 43);
+        System.out.println(localDateTime1);
+
+        // getXxx() 获取相关属性
+        System.out.println(localDateTime.getDayOfMonth());
+        System.out.println(localDateTime.getDayOfWeek());
+        System.out.println(localDateTime.getMonth());
+        System.out.println(localDateTime.getMonthValue());
+        System.out.println(localDateTime.getMinute());
+
+        // withXxxx() 设置相关属性， 具有不可变性
+        LocalDate localDate1 = localDate.withDayOfMonth(20);
+        System.out.println(localDate1);
+
+        LocalDateTime localDateTime2 = localDateTime.withHour(16);
+        System.out.println(localDateTime);
+        System.out.println(localDateTime2);
+
+        //plusXxx() 在现有基础上加上指定数据
+        LocalDateTime localDateTime3 = localDateTime.plusMonths(3);
+        System.out.println(localDateTime);
+        System.out.println(localDateTime3);
+
+        // minusXxx() 在现有基础上减去指定数据
+        LocalDateTime localDateTime4 = localDateTime.minusMonths(3);
+        System.out.println(localDateTime);
+        System.out.println(localDateTime4);
+    }
+}
+```
+
+
+
+### 4.2 Instant 类的使用
+
+> - Instant : 时间线上的瞬时点. 这可能被用来记录应用程序中的事件时间戳.
+
+**方法 :**
+
+- `now()` 静态方法, 返回 UTC 时区的 Instant 类对象
+- `atOffset()` 添加 默认时区 与 当前需要时区 的 时间 的 偏移量
+- `toEpochMilli()` 获取 1970年1月1日0时0分0秒 (UTC) 开始的毫秒数
+- `ofEpochMilli()` 静态方法, 通过给定的毫秒数获取 Instant 的实例
+
+**Demo :**
+
+```java
+package com.broky.commonClass;
+
+import org.junit.jupiter.api.Test;
+
+import java.time.*;
+
+/**
+ * jdk 8 中的时间日期 api
+ *
+ * @author 13roky
+ * @date 2021-05-10 7:05
+ */
+public class JDK8DateTimeTest {
+
+    /*
+    Instant 的使用
+     */
+
+    @Test
+    public void test02() {
+        // now : 获取本初子午线的时间
+        Instant instant = Instant.now(); //格林威治时间
+        System.out.println(instant);
+
+        // 添加 默认时区 与 当前需要时区 的 时间 的 偏移量
+        OffsetDateTime offsetDateTime = instant.atOffset(ZoneOffset.ofHours(8));
+        System.out.println(offsetDateTime);
+
+        // 获取 1970年1月1日0时0分0秒 (UTC) 开始的毫秒数
+        long milli = instant.toEpochMilli();
+        System.out.println(milli);
+        
+        // ofEpochMilli 通过给定的毫秒数获取 Instant 的实例
+        Instant instant1 = Instant.ofEpochMilli(1620783200875L);
+        System.out.println(instant1);
+    }
+}
+```
