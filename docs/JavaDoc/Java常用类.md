@@ -1390,3 +1390,103 @@ public class JDK8DateTimeTest {
     }
 }
 ```
+
+
+
+### 4.3 DateTimeFormatter 类
+
+> 用于格式化和解析 LocalDate、LocalTime、LocalDateTime
+>
+> 类似于 SimpleDateFormat
+
+**格式化方式 :**
+
+1. 预定义的标准格式。如：ISO_LOCAL_DATE_TIME;ISO_LOCAL_DATE;ISO_LOCAL_TIME;
+2. 本地化相关的格式。如：ofLocalizedDateTime(FormatStyle.LONG);
+3. 自定义的格式。如：ofPattern("yyyy-MM-dd hh:mm:ss E");
+
+**解析方式 :**
+
+1. `parse()` 方法
+
+**Demo :**
+
+```java
+package com.broky.commonClass;
+
+import org.junit.jupiter.api.Test;
+
+import java.time.*;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.time.temporal.TemporalAccessor;
+
+/**
+ * jdk 8 中的时间日期 api
+ *
+ * @author 13roky
+ * @date 2021-05-10 7:05
+ */
+public class JDK8DateTimeTest {
+
+    /*
+    DateTimeFormatter:格式化或解析日期、时间
+    类似于SimpleDateFormat
+     */
+
+    @Test
+    public void test03() {
+        // 方式一：预定义的标准格式。如：ISO_LOCAL_DATE_TIME;ISO_LOCAL_DATE;ISO_LOCAL_TIME;
+        DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+        LocalDateTime localDateTime = LocalDateTime.now();
+        System.out.println(localDateTime);
+        String s = formatter.format(localDateTime);
+        System.out.println(s);
+        // 因为使用标准格式进行格式化，所以 localDateTime 格式化前后的值基本没有变化，但是类型变变为了 String
+        // 解析：字符串-->日期
+        TemporalAccessor parse = formatter.parse("2021-05-12T20:48:52.1539765");
+        System.out.println(parse);
+
+        // 方式二：
+        // 本地化相关的格式。如：ofLocalizedDateTime(FormatStyle.LONG);
+        // FormatStyle.LONG / FormatStyle.MEDIUM / FormatStyle.SHORT : 适用于LocalDateTime
+        DateTimeFormatter formatter1 = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM);
+        String s1 = formatter1.format(localDateTime);
+        System.out.println(s1);
+
+        // 本地化相关的格式。如：ofLocalizedDate()
+        // FormatStyle.FULL / FormatStyle.LONG / FormatStyle.MEDIUM / FormatStyle.SHORT : 适用于LocalDateTime
+        DateTimeFormatter formatter2 = DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL);
+        String s2 = formatter2.format(LocalDate.now());
+        System.out.println(s2);
+
+        /*
+        可能会报错 ： java.time.DateTimeException: Unable to extract ZoneId from temporal
+        参考：https://stackoverflow.com/questions/59531046/java-time-datetimeexception-unable-to-extract-zoneid-from-temporal
+         */
+
+        // 方式三：自定义的格式。如：ofPattern("yyyy-MM-dd hh:mm:ss E");
+        DateTimeFormatter formatter3 = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss");
+        String s3 = formatter3.format(localDateTime);
+        System.out.println(s3);
+
+        // 解析
+        TemporalAccessor parse1 = formatter3.parse("2021-05-12 09:24:47");
+        System.out.println(parse1);
+    }
+}
+```
+
+
+
+### 4.4 其它API
+
+-  **ZoneId：**该类中包含了所有的时区信息，一个时区的ID，如 Europe/Paris
+-  ZonedDateTime：一个在ISO-8601日历系统时区的日期时间，如 2007-12- 03T10:15:30+01:00 Europe/Paris。
+  -  其中每个时区都对应着ID，地区ID都为“{区域}/{城市}”的格式，例如： Asia/Shanghai等
+-  Clock：使用时区提供对当前即时、日期和时间的访问的时钟。
+-  持续时间：Duration，用于计算两个“时间”间隔
+- 日期间隔：Period，用于计算两个“日期”间隔
+- TemporalAdjuster : 时间校正器。有时我们可能需要获取例如：将日期调整 到“下一个工作日”等操作。
+- TemporalAdjusters : 该类通过静态方法 (firstDayOfXxx()/lastDayOfXxx()/nextXxx())提供了大量的常用 TemporalAdjuster 的实现。
+
