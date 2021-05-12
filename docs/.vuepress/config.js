@@ -1,5 +1,5 @@
 module.exports = {
-    title: '13roky\'s JavaDoc',
+    title: '13rokyDocs',
     description: 'Java路途漫漫,用于记录Java学习过程中学习到的知识',
     base: '/Vuepress_Java/', // 这里写你的仓库名称
     head: [
@@ -26,8 +26,7 @@ module.exports = {
             {
                 text: '更多文档',
                 items: [
-                    { text: 'test', link: '/test/SecondSidebar/test1.html' },
-                    { text: 'java', link: '/FirstSidebar/Java多线程.html' },
+                    { text: 'JavaDoc', link: '/JavaDoc/Java多线程.html' },
                 ]
             }
         ],
@@ -41,28 +40,26 @@ module.exports = {
         // 设置侧边栏内容
 
         sidebar: {
-            '/FirstSidebar/': [
+            '/JavaDoc/': [
                 {
-                    title:'Java基础',
-                    children:['Java异常']
+                    title: 'Java基础',
+                    children: ['Java异常']
                 },
 
                 {
                     title: 'Java进阶',
-                    children: ['Java多线程','Java常用类']
+                    children: ['Java多线程', 'Java常用类']
                 }
             ],
 
-            '/test/SecondSidebar/': [
-                {
-                    title: 'Sed',
-                    children: ['test1']
-                }
+            '/Dir/': [
+                
+                'Dir'
             ],
         }
     },
 
-    plugins:[
+    plugins: [
         [
             '@vuepress/back-to-top',
         ],
@@ -74,17 +71,17 @@ module.exports = {
             {
                 showDepth: 1,
                 ignore: [
-                  '/',
-                  '/api/'
-                  // 更多...
+                    '/',
+                    '/api/'
+                    // 更多...
                 ],
                 expand: {
-                  default: false,
-                  trigger: 'hover'
+                    default: false,
+                    trigger: 'hover'
                 },
                 customClass: 'your-customClass',
                 disableGlobalUI: false,
-              }
+            }
         ]
     ]
 }

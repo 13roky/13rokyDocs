@@ -1,8 +1,8 @@
 ---
 home: true
 heroImage: https://camo.githubusercontent.com/cb6b21aed79d175ef2bc872d07903bb467705cba35e4e21e91027277b5ba22ab/68747470733a2f2f692e7667792e6d652f47506f6f4a542e706e67
-actionText: 阅读文档 →
-actionLink: /FirstSidebar/Java多线程.html
+actionText: 文档目录 →
+actionLink: /Dir/Dir.html
 features:
 - title: 简洁至上
   details: 以 Markdown 为中心的项目结构，帮助你更舒服的回顾路途中积累的的知识点。
