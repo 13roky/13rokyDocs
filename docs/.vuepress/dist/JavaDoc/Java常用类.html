@@ -8,7 +8,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="/Vuepress_Java/jyjwebdocs/favicon.ico">
     <meta name="description" content="Java路途漫漫,用于记录Java学习过程中学习到的知识">
     
-    <link rel="preload" href="/Vuepress_Java/assets/css/0.styles.2bee24cb.css" as="style"><link rel="preload" href="/Vuepress_Java/assets/js/app.22d415dd.js" as="script"><link rel="preload" href="/Vuepress_Java/assets/js/2.5de4fde3.js" as="script"><link rel="preload" href="/Vuepress_Java/assets/js/9.ab7989e7.js" as="script"><link rel="prefetch" href="/Vuepress_Java/assets/js/10.3d95bec0.js"><link rel="prefetch" href="/Vuepress_Java/assets/js/11.6a4f9cbe.js"><link rel="prefetch" href="/Vuepress_Java/assets/js/3.c951e08a.js"><link rel="prefetch" href="/Vuepress_Java/assets/js/4.9f4249ef.js"><link rel="prefetch" href="/Vuepress_Java/assets/js/5.2835d3d0.js"><link rel="prefetch" href="/Vuepress_Java/assets/js/6.021ccd82.js"><link rel="prefetch" href="/Vuepress_Java/assets/js/7.76039e30.js"><link rel="prefetch" href="/Vuepress_Java/assets/js/8.6850c978.js">
+    <link rel="preload" href="/Vuepress_Java/assets/css/0.styles.2bee24cb.css" as="style"><link rel="preload" href="/Vuepress_Java/assets/js/app.b61da40d.js" as="script"><link rel="preload" href="/Vuepress_Java/assets/js/2.5de4fde3.js" as="script"><link rel="preload" href="/Vuepress_Java/assets/js/9.631237af.js" as="script"><link rel="prefetch" href="/Vuepress_Java/assets/js/10.3d95bec0.js"><link rel="prefetch" href="/Vuepress_Java/assets/js/11.6a4f9cbe.js"><link rel="prefetch" href="/Vuepress_Java/assets/js/3.c951e08a.js"><link rel="prefetch" href="/Vuepress_Java/assets/js/4.9f4249ef.js"><link rel="prefetch" href="/Vuepress_Java/assets/js/5.2835d3d0.js"><link rel="prefetch" href="/Vuepress_Java/assets/js/6.021ccd82.js"><link rel="prefetch" href="/Vuepress_Java/assets/js/7.5a02f430.js"><link rel="prefetch" href="/Vuepress_Java/assets/js/8.6850c978.js">
     <link rel="stylesheet" href="/Vuepress_Java/assets/css/0.styles.2bee24cb.css">
   </head>
   <body>
@@ -1265,11 +1265,93 @@ getTime()：获取当前Date对象对应的毫秒数。（时间戳）</p></bloc
         <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">RuntimeException</span><span class="token punctuation">(</span><span class="token string">&quot;传入的数据类型不一致&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-</code></pre></div><h3 id="_4-6-comparator-接口-定制排序"><a href="#_4-6-comparator-接口-定制排序" class="header-anchor">#</a> 4.6 Comparator 接口 定制排序</h3> <blockquote><p>根据定制的规则进行比较, Comparator属于定制排序</p></blockquote> <p><strong>说明 :</strong></p> <ol><li>当元素的类型没有实现java.lang.Comparable接口而又不方便修改代码， 或者实现了java.lang.Comparable接口的排序规则不适合当前的操作，那么可以考虑使用 Comparator 的对象来排序，强行对多个对象进行整体排序的比较。</li></ol></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+</code></pre></div><h3 id="_4-6-comparator-接口-定制排序"><a href="#_4-6-comparator-接口-定制排序" class="header-anchor">#</a> 4.6 Comparator 接口 定制排序</h3> <blockquote><p>根据定制的规则进行比较, Comparator属于定制排序</p> <p>当元素的类型没有实现java.lang.Comparable 接口而又不方便修改代码，或者实现了java.lang.Comparable 接口的排序规则不适合当前的操作, 那么可以使用 Compare(obj o1,obj o2)方法, 比较o1和o2的大小</p></blockquote> <p><strong>说明 :</strong></p> <ol><li>当元素的类型没有实现java.lang.Comparable接口而又不方便修改代码， 或者实现了java.lang.Comparable接口的排序规则不适合当前的操作，那么可以考虑使用 Comparator 的对象来排序，强行对多个对象进行整体排序的比较。</li></ol> <p><strong>使用 :</strong></p> <ol><li>在 <code>Arrays.sort()</code> 方法中使用匿名内部类的方法实现定制排序 <strong>(详情见Demo)</strong></li></ol> <p><strong>Demo :</strong></p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>broky<span class="token punctuation">.</span>commonClass</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>junit<span class="token punctuation">.</span>jupiter<span class="token punctuation">.</span>api<span class="token punctuation">.</span></span><span class="token class-name">Test</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">Arrays</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">Comparator</span><span class="token punctuation">;</span>
+
+<span class="token comment">/**
+ * 1) 说明: Java中的对象, 正常情况下, 只能进行比较:==或!= 不能使用&gt;或&lt;
+ *          但是在开发场景中, 我们需要对多个对象进行排序, 言外之意, 就需要比较对象的大小
+ *          如何实现? 使用两个接口中的任何一个: Comparable 或 Comparator
+ * 2) Comparable 接口与 Comparator 的使用的对比
+ *          Comparable 接口的方式一旦实现,保证 Comparable 接口实现类的对象在任何位置都可以比较大小
+ *          Comparator 接口属于临时性的比较.
+ *
+ * @author 13roky
+ * @date 2021-05-12 22:15
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">CompareTest</span> <span class="token punctuation">{</span>
+    
+    <span class="token comment">/*
+    Comparator 接口的使用： 定制排序
+    1. 背景
+    当元素的类型没有实现java.lang.Comparable 接口而又不方便修改代码，
+    或者实现了java.lang.Comparable 接口的排序规则不适合当前的操作
+    那么可以使用 Compare(obj o1,obj o2)方法, 比较o1和o2的大小
+    2. 重写 Compare(obj o1,obj o2) 方法, 比较o1和o2的大小
+    如果方法返回正数,则表示o1大于o2
+    如果方法返回负数,则表示01小于02
+    如果方法返回0, 则表示相等
+     */</span>
+    <span class="token annotation punctuation">@Test</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">test03</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token comment">// test1</span>
+        <span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> arr <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">{</span><span class="token string">&quot;aa&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;cc&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;kk&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;mm&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;gg&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;jj&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;dd&quot;</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+        <span class="token comment">// 从大到小排序</span>
+        <span class="token class-name">Arrays</span><span class="token punctuation">.</span><span class="token function">sort</span><span class="token punctuation">(</span>arr<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">Comparator</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token annotation punctuation">@Override</span>
+            <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">compare</span><span class="token punctuation">(</span><span class="token class-name">Object</span> o1<span class="token punctuation">,</span> <span class="token class-name">Object</span> o2<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">if</span><span class="token punctuation">(</span>o1 <span class="token keyword">instanceof</span> <span class="token class-name">String</span> <span class="token operator">&amp;&amp;</span> o2 <span class="token keyword">instanceof</span> <span class="token class-name">String</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+                    <span class="token class-name">String</span> s1 <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">)</span> o1<span class="token punctuation">;</span>
+                    <span class="token class-name">String</span> s2 <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">)</span> o2<span class="token punctuation">;</span>
+                    <span class="token keyword">return</span> <span class="token operator">-</span>s1<span class="token punctuation">.</span><span class="token function">compareTo</span><span class="token punctuation">(</span>s2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+                <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">RuntimeException</span><span class="token punctuation">(</span><span class="token string">&quot;输入的类型不一致&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token class-name">Arrays</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Test</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">test04</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+        <span class="token class-name">Goods</span><span class="token punctuation">[</span><span class="token punctuation">]</span> arr <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Goods</span><span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        arr<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Goods</span><span class="token punctuation">(</span><span class="token string">&quot;lenovoMouse&quot;</span><span class="token punctuation">,</span><span class="token number">34</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        arr<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Goods</span><span class="token punctuation">(</span><span class="token string">&quot;huaweiMouse&quot;</span><span class="token punctuation">,</span><span class="token number">43</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        arr<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Goods</span><span class="token punctuation">(</span><span class="token string">&quot;xiaomiMouse&quot;</span><span class="token punctuation">,</span><span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        arr<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Goods</span><span class="token punctuation">(</span><span class="token string">&quot;huaweiMouse&quot;</span><span class="token punctuation">,</span><span class="token number">65</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        arr<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Goods</span><span class="token punctuation">(</span><span class="token string">&quot;microSoftiMouse&quot;</span><span class="token punctuation">,</span><span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token class-name">Arrays</span><span class="token punctuation">.</span><span class="token function">sort</span><span class="token punctuation">(</span>arr<span class="token punctuation">,</span><span class="token keyword">new</span> <span class="token class-name">Comparator</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token comment">// 指明商品比较大小的方式：再按照产品名称从第到高排序, 按照价格从高到低排序</span>
+            <span class="token annotation punctuation">@Override</span>
+            <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">compare</span><span class="token punctuation">(</span><span class="token class-name">Object</span> o1<span class="token punctuation">,</span> <span class="token class-name">Object</span> o2<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>o1 <span class="token keyword">instanceof</span> <span class="token class-name">Goods</span> <span class="token operator">&amp;&amp;</span> o2 <span class="token keyword">instanceof</span> <span class="token class-name">Goods</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+                    <span class="token class-name">Goods</span> g1 <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token class-name">Goods</span><span class="token punctuation">)</span> o1<span class="token punctuation">;</span>
+                    <span class="token class-name">Goods</span> g2 <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token class-name">Goods</span><span class="token punctuation">)</span> o2<span class="token punctuation">;</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>g1<span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>g2<span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+                        <span class="token keyword">return</span> <span class="token operator">-</span><span class="token class-name">Double</span><span class="token punctuation">.</span><span class="token function">compare</span><span class="token punctuation">(</span>g1<span class="token punctuation">.</span><span class="token function">getPrice</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>g2<span class="token punctuation">.</span><span class="token function">getPrice</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span><span class="token keyword">else</span> <span class="token punctuation">{</span>
+                        <span class="token keyword">return</span> g1<span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">compareTo</span><span class="token punctuation">(</span>g2<span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span>
+                <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">RuntimeException</span><span class="token punctuation">(</span><span class="token string">&quot;输入的数据类型不一致&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token class-name">Arrays</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
       ←
       <a href="/Vuepress_Java/JavaDoc/Java多线程.html" class="prev">
         Java多线程
       </a></span> <!----></p></div> </main></div><div class="global-ui"><!----><!----></div></div>
-    <script src="/Vuepress_Java/assets/js/app.22d415dd.js" defer></script><script src="/Vuepress_Java/assets/js/2.5de4fde3.js" defer></script><script src="/Vuepress_Java/assets/js/9.ab7989e7.js" defer></script>
+    <script src="/Vuepress_Java/assets/js/app.b61da40d.js" defer></script><script src="/Vuepress_Java/assets/js/2.5de4fde3.js" defer></script><script src="/Vuepress_Java/assets/js/9.631237af.js" defer></script>
   </body>
 </html>

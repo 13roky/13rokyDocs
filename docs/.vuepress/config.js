@@ -1,7 +1,7 @@
 module.exports = {
     title: '13rokyDocs',
     description: 'Java路途漫漫,用于记录Java学习过程中学习到的知识',
-    base: '/Vuepress_Java/', // 这里写你的仓库名称
+    base: '/13rokyDocs/', // 这里写你的仓库名称
     head: [
         ['link', { rel: 'shortcut icon', type: "image/x-icon", href: `/jyjwebdocs/favicon.ico` }]
     ], //这里配置你的网页头部信息等
