@@ -9,7 +9,7 @@ module.exports = {
 
     themeConfig: {
         //侧边栏展开所有标题
-        displayAllHeaders: true, // 默认值：false
+        displayAllHeaders: false, // 默认值：false
 
         nav: [
             { text: '首页', link: '/' },
@@ -43,12 +43,19 @@ module.exports = {
             '/JavaDoc/': [
                 {
                     title: 'Java基础',
-                    children: ['Java异常']
+                    collapsable: false, 
+                    children: [
+                        {title:'Java异常', path:'Java异常'},
+                    ]
                 },
 
                 {
                     title: 'Java进阶',
-                    children: ['Java多线程', 'Java常用类']
+                    collapsable: false,
+                    children: [
+                        {title:'Java多线程', path:'Java多线程'},
+                        {title:'Java常用类', path:'Java常用类'},
+                    ]
                 }
             ],
 

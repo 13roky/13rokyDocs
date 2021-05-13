@@ -1490,7 +1490,11 @@ public class JDK8DateTimeTest {
 - TemporalAdjuster : 时间校正器。有时我们可能需要获取例如：将日期调整 到“下一个工作日”等操作。
 - TemporalAdjusters : 该类通过静态方法 (firstDayOfXxx()/lastDayOfXxx()/nextXxx())提供了大量的常用 TemporalAdjuster 的实现。
 
-### 4.5 Comparable 接口 自然排序
+
+
+## 5. Comparable 和 Comparator 接口
+
+### 5.1 Comparable 接口 自然排序
 
 > 用于对象与对象的比较, Comparable属于自然排序
 
@@ -1504,13 +1508,13 @@ public class JDK8DateTimeTest {
 
 **Comparable 接口的使用举例 :**
 
-    1. 像 String, 包装类等实现了 Comparable 接口, 重写了 `compareTo(obj)` 方法, 给出了比较两个对象
-    2. 像 String, 包装类重写了`compareTo()`方法以后, 进行了从小到大的排列
-    3. 重写 `compareTo(obj)` 的规则:
-       如果当前对象 this 等于形参对象 obj, 则返回为零
-       如果当前对象 this 小于形参对象 obj, 则返回负整数
-       如果当前对象 this 大于形参对象 obj, 则返回正整数
-    4. **对于自定义类来说**, 如果需要排序, 我们可以让自定义类实现 Comparable 接口, 重写 `compareTo(obj)` 方法并在 `compareTO(obj)` 方法中指明如何排序
+  1. 像 String, 包装类等实现了 Comparable 接口, 重写了 `compareTo(obj)` 方法, 给出了比较两个对象
+  2. 像 String, 包装类重写了`compareTo()`方法以后, 进行了从小到大的排列
+  3. 重写 `compareTo(obj)` 的规则:
+        如果当前对象 this 等于形参对象 obj, 则返回为零
+        如果当前对象 this 小于形参对象 obj, 则返回负整数
+        如果当前对象 this 大于形参对象 obj, 则返回正整数
+  4. **对于自定义类来说**, 如果需要排序, 我们可以让自定义类实现 Comparable 接口, 重写 `compareTo(obj)` 方法并在 `compareTO(obj)` 方法中指明如何排序
 
 **Demo：**
 
@@ -1634,7 +1638,7 @@ public class Goods implements Comparable {
 
 
 
-### 4.6 Comparator 接口 定制排序
+### 5.2 Comparator 接口 定制排序
 
 > 根据定制的规则进行比较, Comparator属于定制排序
 >
@@ -1647,6 +1651,12 @@ public class Goods implements Comparable {
 **使用 :**
 
 1. 在 `Arrays.sort()` 方法中使用匿名内部类的方法实现定制排序 **(详情见Demo)**
+
+**Comparable 接口与 Comparator 的使用的对比 : **
+
+1. Comparable 接口的方式一旦实现,保证 Comparable 接口实现类的对象在任何位置都可以比较大小
+
+2. Comparator 接口属于临时性的比较.
 
 **Demo :**
 
@@ -1736,3 +1746,141 @@ public class CompareTest {
 ```
 
 
+
+## 6. System 类
+
+> System类代表系统，系统级的很多属性和控制方法都放置在该类的内部。 该类位于java.lang包。 
+>
+> 由于该类的构造器是private的，所以无法创建该类的对象，也就是无法实 例化该类。其内部的成员变量和成员方法都是static的，所以也可以很方便 的进行调用。   
+>
+>   成员方法  native long currentTimeMillis()： 该方法的作用是返回当前的计算机时间，时间的表达格式为当前计算机时 间和GMT时间(格林威治时间)1970年1月1号0时0分0秒所差的毫秒数。  void exit(int status)： 该方法的作用是退出程序。其中status的值为0代表正常退出，非零代表 异常退出。使用该方法可以在图形界面编程中实现程序的退出功能等。
+
+**成员变量 ：**
+
+- System类内部包含in、out和err三个成员变量，分别代表标准输入流 (键盘输入)，标准输出流(显示器)和标准错误输出流(显示器)。
+
+**成员方法 :** 
+
+- native long currentTimeMillis()： 该方法的作用是返回当前的计算机时间，时间的表达格式为当前计算机时 间和GMT时间(格林威治时间)1970年1月1号0时0分0秒所差的毫秒数。 
+- void exit(int status)： 该方法的作用是退出程序。其中status的值为0代表正常退出，非零代表 异常退出。使用该方法可以在图形界面编程中实现程序的退出功能等。
+-  void gc()： 该方法的作用是请求系统进行垃圾回收。至于系统是否立刻回收，则 取决于系统中垃圾回收算法的实现以及系统执行时的情况。 
+-  String getProperty(String key)： 该方法的作用是获得系统中属性名为key的属性对应的值。系统中常见 的属性名以及属性的作用如下表所示：
+
+![](https://i.vgy.me/ce0h3E.png)
+
+ 
+
+## 7. Math类
+
+> java.lang.Math提供了一系列静态方法用于科学计算。
+>
+> 其方法的参数和返回 值类型一般为double型。 
+
+**方法 :**
+
+- abs 绝对值 
+- acos,asin,atan,cos,sin,tan 三角函数 
+- sqrt 平方根 
+- pow(double a,doble b) a的b次幂 
+- log 自然对数 
+- exp e为底指数 
+- max(double a,double b) 
+- min(double a,double b) 
+- random() 返回0.0到1.0的随机数 
+- long round(double a) double型数据a转换为long型（四舍五入） 
+- toDegrees(double angrad) 弧度—>角度 
+- toRadians(double angdeg) 角度—>弧度
+
+
+
+## 8. BigInteger 与 BigDecimal 类
+
+> 用于操作较大的整数
+
+### 8.1 BigInteger 类
+
+> 类似于整形
+
+**说明 :**
+
+1. Integer类作为int的包装类，能存储的最大整型值为2 31-1，Long类也是有限的， 最大为2 63-1。如果要表示再大的整数，不管是基本数据类型还是他们的包装类 都无能为力，更不用说进行运算了。
+2. **java.math包的BigInteger可以表示不可变的任意精度的整数。**BigInteger 提供 所有 Java 的基本整数操作符的对应物，并提供 java.lang.Math 的所有相关方法。 另外，BigInteger 还提供以下运算：模算术、GCD 计算、质数测试、素数生成、 位操作以及一些其他操作。
+
+**构造器 :**
+
+- BigInteger(String val)：根据字符串构建 BigInteger 对象
+
+**常用方法 :** 
+
+public **BigInteger** abs()：返回此 BigInteger 的绝对值的 BigInteger。
+
+BigInteger **add**(BigInteger val) ：返回其值为 (this + val) 的 BigInteger 
+
+BigInteger subtract(BigInteger val) ：返回其值为 (this - val) 的 BigInteger 
+
+BigInteger **multiply**(BigInteger val) ：返回其值为 (this * val) 的 BigInteger 
+
+BigInteger **divide**(BigInteger val) ：返回其值为 (this / val) 的 BigInteger。整数 相除只保留整数部分。
+
+BigInteger **remainder**(BigInteger val) ：返回其值为 (this % val) 的 BigInteger。 
+
+BigInteger[] **divideAndRemainder**(BigInteger val)：返回包含 (this / val) 后跟 (this % val) 的两个 BigInteger 的数组。
+
+BigInteger pow(int exponent) ：返回其值为 (thisexponent) 的 BigInteger。
+
+
+
+### 8.2 BigDecimal 类
+
+> 类似于浮点型
+
+**说明 :**
+
+1. 一般的Float类和Double类可以用来做科学计算或工程计算，但**在商业计算中， 要求数字精度比较高，故用到java.math.BigDecimal类**。
+2. BigDecimal 类支持不可变的、任意精度的有符号十进制定点数。
+
+**构造器 :** 
+
+- public BigDecimal(double val) 
+
+- public BigDecimal(String val)
+
+**常用方法 :**
+
+public BigDecimal **add**(BigDecimal augend)
+
+public BigDecimal **subtract**(BigDecimal subtrahend) 
+
+public BigDecimal **multiply**(BigDecimal multiplicand) 
+
+public BigDecimal **divide**(BigDecimal divisor, int scale, int roundingMode)
+
+**Demo :**
+
+```java
+package com.broky.commonClass;
+
+import org.junit.jupiter.api.Test;
+
+import java.math.BigDecimal;
+import java.math.BigInteger;
+
+/**
+ * @author 13roky
+ * @date 2021-05-13 12:56
+ */
+public class OtherClassTest {
+    
+    @Test
+    public void testBigInteger() {
+        BigInteger bi = new BigInteger("12433241123");
+        BigDecimal bd = new BigDecimal("12435.351");
+        BigDecimal bd2 = new BigDecimal("11");
+        System.out.println(bi);
+        // BigDecimal.ROUND_HALF_UP 四舍五入
+        System.out.println(bd.divide(bd2, BigDecimal.ROUND_HALF_UP));
+        System.out.println(bd.divide(bd2, 15, BigDecimal.ROUND_HALF_UP));
+    }
+
+}
+```
