@@ -55,6 +55,7 @@ module.exports = {
                     children: [
                         {title:'Java多线程', path:'Java多线程'},
                         {title:'Java常用类', path:'Java常用类'},
+                        {title:'Java枚举类和注解', path:'Java枚举类和注解'},
                     ]
                 }
             ],
