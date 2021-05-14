@@ -1,6 +1,6 @@
 # Java枚举类与注解
 
-[[toc]]
+[toc]
 
 ## 一、枚举类
 
@@ -39,7 +39,7 @@
 
 
 
-### ① 自定义枚举类
+## 	① 自定义枚举类
 
 > 通过自己写一个自定义的类来实现自定义枚举类。
 
@@ -113,7 +113,7 @@ class Season{
 
 
 
-### ② enum关键字定义枚举类
+## 	② enum关键字定义枚举类
 
 > 通过使用enum关键字，和一些简便的规则，更方便枚举类的创建
 
@@ -205,7 +205,7 @@ enum Season1 {
 
 
 
-### ③ enum 枚举类的方法
+## 	③ enum 枚举类的方法
 
 - **values() ：**返回枚举类型的对象数组。该方法可以很方便地遍历所有的 枚举值。
 - **valueOf(String str) ：**可以把一个字符串转为对应的枚举类对象。要求字符 串必须是枚举类对象的“名字”。如不是，会有运行时异常：IllegalArgumentException。
@@ -255,7 +255,7 @@ public class SeasonTest1 {
 
 
 
-### ④ enum 枚举类实现接口
+## 	④ enum 枚举类实现接口
 
 > enum 枚举类可以像正常类那样实现接口并重写接口中的方法
 >
@@ -368,4 +368,341 @@ enum Season1 implements info{
 
 
 ## 二、注解
+
+- 从 JDK 5.0 开始, Java 增加了对元数据(MetaData) 的支持, 也就是 Annotation(注解)
+
+- Annotation 其实就是代码里的特殊标记, 这些标记可以在编译, 类加 载, 运行时被读取, 并执行相应的处理。通过使用 Annotation, 程序员 可以在不改变原有逻辑的情况下, 在源文件中嵌入一些补充信息。代 码分析工具、开发工具和部署工具可以通过这些补充信息进行验证 或者进行部署。
+
+- Annotation 可以像修饰符一样被使用, 可用于修饰包,类, 构造器, 方 法, 成员变量, 参数, 局部变量的声明, 这些信息被保存在 Annotation  的 “name=value” 对中。
+- 在JavaSE中，注解的使用目的比较简单，例如标记过时的功能， 忽略警告等。在JavaEE/Android中注解占据了更重要的角色，例如 用来配置应用程序的任何切面，代替JavaEE旧版中所遗留的繁冗 代码和XML配置等。
+- 未来的开发模式都是基于注解的，JPA是基于注解的，Spring2.5以 上都是基于注解的，Hibernate3.x以后也是基于注解的，现在的 Struts2有一部分也是基于注解的了，注解是一种趋势，一定程度上 可以说：**框架 = 注解 + 反射 + 设计模式**。
+
+- 使用 Annotation 时要在其前面增加 @ 符号, 并把该 Annotation 当成 一个修饰符使用。用于修饰它支持的程序元素
+
+## 	① 生成文档相关注解
+
+**用法：**
+
+- @author 标明开发该类模块的作者，多个作者之间使用,分割 
+- @version 标明该类模块的版本 
+- @see 参考转向，也就是相关主题 
+- @since 从哪个版本开始增加的 
+- @param 对方法中某参数的说明，如果没有参数就不能写 
+- @return 对方法返回值的说明，如果方法的返回值类型是void就不能写 
+- @exception 对方法可能抛出的异常进行说明 ，如果方法没有用throws显式抛出的异常就不能写 
+
+**说明：**
+
+- @param @return 和 @exception 这三个标记都是只用于方法的。 
+- @param的格式要求：@param 形参名 形参类型 形参说明 
+- @return 的格式要求：@return 返回值类型 返回值说明 
+- @exception的格式要求：@exception 异常类型 异常说明 
+- @param和@exception可以并列多个
+
+**Demo：**
+
+```java
+package com.broky.EnumClass;
+
+/**
+ * @author 13roky
+ * @version 1.0
+ * @see Math.java
+ */
+public class JavadocTest {
+    /**
+     * 程序的主方法，程序的入口
+     *
+     * @param args String[] 命令行参数
+     */
+    public static void main(String[] args) {
+    }
+
+    /**
+     * 求圆面积的方法
+     *
+     * @param radius double 半径值
+     * @return double 圆的面积
+     */
+    public static double getArea(double radius) {
+        return Math.PI * radius * radius;
+    }
+}
+```
+
+
+
+## 	②注解在编译时进行格式检查
+
+> 编译时，会强制校验注解处的方法是否符合注解，如果不符合会报错
+
+**JDK内置的三个基本注解：**
+
+- @Override: 限定重写父类方法, 该注解只能用于方法 
+- @Deprecated: 用于表示所修饰的元素(类, 方法, 属性等·已过时。通常是因为 所修饰的结构危险或存在更好的选择 
+- @SuppressWarnings: 抑制编译器警告，消除某段代码在编译器中的警告
+
+**Demo：**
+
+```java
+package com.broky.EnumClass;
+
+public class AnnotationTest{
+    public static void main(String[] args) {
+        @SuppressWarnings("unused")
+        int a = 10;
+    }
+    @Deprecated
+    public void print(){
+        System.out.println("过时的方法");
+    }
+    @Override
+    public String toString() {
+        return "重写的toString方法()";
+    }
+}
+```
+
+
+
+## 	③注解跟踪代码的依赖性，实现替代配置文件功能
+
+-  Servlet3.0提供了注解(annotation),使得不再需要在web.xml文件中进行Servlet的部署。
+
+```java
+import java.io.IOException;
+
+@WebServlet("/login")
+public class LoginServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doGet(request, response);
+    }
+}
+```
+
+```xml
+<servlet>
+<servlet-name>LoginServlet</servlet-name>
+<servlet-class>com.servlet.LoginServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+<servlet-name>LoginServlet</servlet-name>
+<url-pattern>/login</url-pattern>
+</servlet-mapping>
+```
+
+
+
+-  spring框架中关于“事务”的管理
+
+```java
+ @Transactional(propagation = Propagation.REQUIRES_NEW, isolation = Isolation.READ_COMMITTED, readOnly = false, timeout = 3) public void buyBook(String username,String isbn){
+        //1.查询书的单价
+        int price=bookShopDao.findBookPriceByIsbn(isbn);
+        //2. 更新库存
+        bookShopDao.updateBookStock(isbn);
+        //3. 更新用户的余额
+        bookShopDao.updateUserAccount(username,price);
+        }
+```
+
+```xml
+<!-- 配置事务属性 -->
+<tx:advice transaction-manager="dataSourceTransactionManager" id="txAdvice">
+<tx:attributes>
+<!-- 配置每个方法使用的事务属性 -->
+<tx:method name="buyBook" propagation="REQUIRES_NEW"
+isolation="READ_COMMITTED" read-only="false" timeout="3" />
+</tx:attributes>
+</tx:advice>
+```
+
+
+
+## 	④ 自定义注解
+
+
+
+**说明：**
+
+- 定义新的 Annotation 类型使用 @interface 关键字 
+- 自定义注解自动继承了java.lang.annotation.Annotation接口 
+-  Annotation 的成员变量在 Annotation 定义中以无参数方法的形式来声明。其 方法名和返回值定义了该成员的名字和类型。我们称为配置参数。类型只能 是八种基本数据类型、String类型、Class类型、enum类型、Annotation类型、 以上所有类型的数组。 
+- 可以在定义 Annotation 的成员变量时为其指定初始值, 指定成员变量的初始 值可使用 default 关键字 
+- 如果只有一个参数成员，建议使用参数名为value 
+-  如果定义的注解含有配置参数，那么使用时必须指定参数值，除非它有默认 值。格式是“参数名 = 参数值” ，如果只有一个参数成员，且名称为value， 可以省略“value=” 
+- 没有成员定义的 Annotation 称为标记; 包含成员变量的 Annotation 称为元数 据 Annotation 注意：自定义注解必须配上注解的信息处理流程才有意义。
+
+**注意：自定义注解必须配上注解的信息处理流程才有意义。**（使用反射实现）
+
+**Demo:**
+
+```java
+package com.broky.EnumClass;
+
+/**
+ * @author 13roky
+ * @date 2021-05-14 8:36
+ */
+public @interface MyAnnotation {
+    String value() default "test";
+}
+
+package com.broky.EnumClass;
+
+/**
+ * @author 13roky
+ * @date 2021-05-14 8:16
+ */
+public class AnnotationTest {
+    @MyAnnotation()
+    void test(){
+        
+    }
+}
+```
+
+
+
+## 	⑤ jdk提供的4种元注解
+
+
+
+**说明：**
+
+- JDK 的元 Annotation 用于修饰其他 Annotation 定义
+- JDK5.0提供了4个标准的meta-annotation类型，分别是：
+  - Retention 
+  - Target 
+  - Documented 
+  - Inherited
+
+
+
+**元注解说明：**
+
+- **@Retention:** 只能用于修饰一个 Annotation 定义, 用于指定该 Annotation 的生命 周期, @Rentention 包含一个 RetentionPolicy 类型的成员变量, 使用 @Rentention 时必须为该 value 成员变量指定值:
+
+  - **RetentionPolicy.SOURCE: **在源文件中有效（即源文件保留），编译器直接丢弃这种策略的 注释
+
+  - **RetentionPolicy.CLASS（默认）: **在class文件中有效（即class保留） ， 当运行 Java 程序时, JVM  不会保留注解。 这是默认值
+
+  - **RetentionPolicy.RUNTIME:** 在运行时有效（即运行时保留），当运行 Java 程序时, JVM 会 保留注释。程序可以通过反射获取该注释
+
+    只有声明为RUNTIME生命周期的注解，才能通过反射获取。
+
+```java
+public enum RetentionPolicy{
+SOURCE,
+CLASS,
+RUNTIME
+}
+
+@Retention(RetentionPolicy.SOURCE)
+@interface MyAnnotation1{ }
+@Retention(RetentionPolicy.RUNTIME)
+@interface MyAnnotation2{ }
+
+```
+
+- @Target: 用于修饰 Annotation 定义, 用于指定被修饰的 Annotation 能用于 修饰哪些程序元素。 @Target 也包含一个名为 value 的成员变量。
+
+![](https://i.vgy.me/JvS9L6.png)
+
+```java
+@Target({FIELD,METHOD,TYPE})
+@Retention(RetentionPolicy.SOURCE)
+@interface MyAnnotation1{ }
+```
+
+
+
+- @Documented: 用于指定被该元 Annotation 修饰的 Annotation 类将被 javadoc 工具提取成文档。默认情况下，javadoc是不包括注解的。 
+  - **定义为Documented的注解必须设置Retention值为RUNTIME。**
+- @Inherited: 被它修饰的 Annotation 将具有继承性。如果某个类使用了被 @Inherited 修饰的 Annotation, 则其子类将自动具有该注解。 
+  - 比如：如果把标有@Inherited注解的自定义的注解标注在类级别上，子类则可以 继承父类类级别的注解 
+  - 实际应用中，使用较少
+
+**元数据的理解：**
+
+String name ="13roky"
+
+这个数据中13roky最为重要，String 和 name 都是对其进行修饰，那么String 和 name 就可以叫做元数据：用于修饰数据的数据
+
+
+
+## ⑥ JKD8 新特性：可重复注解
+
+**JDK8 之前重复注解的实现：**
+
+JDK8 之前如果要同一位置加多个相同注解，需要使用数组来添加
+
+
+
+**JKD8 新特性：可重复注解：**
+
+**Demo：**
+
+```java
+package com.broky.EnumClass;
+
+/**
+ * @author 13roky
+ * @date 2021-05-14 8:16
+ */
+public class AnnotationTest {
+    @MyAnnotation()
+    @MyAnnotation()
+    void test(){
+
+    }
+}
+```
+
+```java
+package com.broky.EnumClass;
+
+import java.lang.annotation.*;
+
+import static java.lang.annotation.ElementType.*;
+
+/**
+ * @author 13roky
+ * @date 2021-05-14 8:36
+ */
+
+@Repeatable(MyAnnotations.class)
+@Retention(RetentionPolicy.SOURCE)
+@Target({FIELD, METHOD})
+public @interface MyAnnotation {
+    String value() default "test";
+}
+```
+
+```java
+package com.broky.EnumClass;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.ElementType.METHOD;
+
+/**
+ * @author 13roky
+ * @date 2021-05-14 9:43
+ */
+@Retention(RetentionPolicy.SOURCE)
+@Target({FIELD, METHOD})
+public @interface MyAnnotations {
+    MyAnnotation[] value();
+}
+
+```
 
