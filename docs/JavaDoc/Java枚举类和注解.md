@@ -39,7 +39,7 @@
 
 
 
-## 	① 自定义枚举类
+## 	1. 自定义枚举类
 
 > 通过自己写一个自定义的类来实现自定义枚举类。
 
@@ -113,7 +113,7 @@ class Season{
 
 
 
-## 	② enum关键字定义枚举类
+## 	2. enum关键字定义枚举类
 
 > 通过使用enum关键字，和一些简便的规则，更方便枚举类的创建
 
@@ -205,7 +205,7 @@ enum Season1 {
 
 
 
-## 	③ enum 枚举类的方法
+## 	3. enum 枚举类的方法
 
 - **values() ：**返回枚举类型的对象数组。该方法可以很方便地遍历所有的 枚举值。
 - **valueOf(String str) ：**可以把一个字符串转为对应的枚举类对象。要求字符 串必须是枚举类对象的“名字”。如不是，会有运行时异常：IllegalArgumentException。
@@ -255,7 +255,7 @@ public class SeasonTest1 {
 
 
 
-## 	④ enum 枚举类实现接口
+## 	4. enum 枚举类实现接口
 
 > enum 枚举类可以像正常类那样实现接口并重写接口中的方法
 >
@@ -379,7 +379,7 @@ enum Season1 implements info{
 
 - 使用 Annotation 时要在其前面增加 @ 符号, 并把该 Annotation 当成 一个修饰符使用。用于修饰它支持的程序元素
 
-## 	① 生成文档相关注解
+## 	1. 生成文档相关注解
 
 **用法：**
 
@@ -432,7 +432,7 @@ public class JavadocTest {
 
 
 
-## 	②注解在编译时进行格式检查
+## 	2. 注解在编译时进行格式检查
 
 > 编译时，会强制校验注解处的方法是否符合注解，如果不符合会报错
 
@@ -465,7 +465,7 @@ public class AnnotationTest{
 
 
 
-## 	③注解跟踪代码的依赖性，实现替代配置文件功能
+## 	3. 注解跟踪代码的依赖性，实现替代配置文件功能
 
 -  Servlet3.0提供了注解(annotation),使得不再需要在web.xml文件中进行Servlet的部署。
 
@@ -524,7 +524,7 @@ isolation="READ_COMMITTED" read-only="false" timeout="3" />
 
 
 
-## 	④ 自定义注解
+## 	4. 自定义注解
 
 
 
@@ -569,7 +569,7 @@ public class AnnotationTest {
 
 
 
-## 	⑤ jdk提供的4种元注解
+## 	5. jdk提供的4种元注解
 
 
 
@@ -636,7 +636,7 @@ String name ="13roky"
 
 
 
-## ⑥ JKD8 新特性：可重复注解
+## 6. JKD8 新特性：可重复注解
 
 **JDK8 之前重复注解的实现：**
 
@@ -745,7 +745,7 @@ public @interface MyAnnotations {
 
 
 
-## 	⑦ JDK8 新特性：类型注解
+## 	7. JDK8 新特性：类型注解
 
 > 可以理解为，类型注解就是对元注解@Target，新增的两个参数类型
 >

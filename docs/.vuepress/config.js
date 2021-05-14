@@ -43,9 +43,9 @@ module.exports = {
             '/JavaDoc/': [
                 {
                     title: 'Java基础',
-                    collapsable: false, 
+                    collapsable: false,
                     children: [
-                        {title:'Java异常', path:'Java异常'},
+                        { title: 'Java异常', path: 'Java异常' },
                     ]
                 },
 
@@ -53,16 +53,17 @@ module.exports = {
                     title: 'Java进阶',
                     collapsable: false,
                     children: [
-                        {title:'Java多线程', path:'Java多线程'},
-                        {title:'Java常用类', path:'Java常用类'},
-                        {title:'Java枚举类和注解', path:'Java枚举类和注解'},
+                        { title: 'Java多线程', path: 'Java多线程' },
+                        { title: 'Java常用类', path: 'Java常用类' },
+                        { title: 'Java枚举类和注解', path: 'Java枚举类和注解' },
                     ]
                 }
             ],
 
             '/Dir/': [
-                
+
                 'Dir'
+
             ],
         }
     },
@@ -71,9 +72,11 @@ module.exports = {
         [
             '@vuepress/back-to-top',
         ],
+
         [
             'fulltext-search',
         ],
+
         [
             'vuepress-plugin-right-anchor',
             {
@@ -90,6 +93,29 @@ module.exports = {
                 customClass: 'your-customClass',
                 disableGlobalUI: false,
             }
-        ]
+        ],
+
+        // ['thirdparty-search', {
+
+        //     thirdparty: [ // 可选，默认 []
+        //         {
+        //             title: '在CSDN中搜索',
+        //             frontUrl: 'https://so.csdn.net/so/search/all?q=',
+        //         },
+        //         {
+        //             title: '在MDN中搜索', // 在搜索结果显示的文字
+        //             frontUrl: 'https://developer.mozilla.org/zh-CN/search?q=', // 搜索链接的前面部分
+        //             behindUrl: '' // 搜索链接的后面部分，可选，默认 ''
+        //         },
+        //         {
+        //             title: '在Runoob中搜索',
+        //             frontUrl: 'https://www.runoob.com/?s=',
+        //         },
+        //         {
+        //             title: '在Vue API中搜索',
+        //             frontUrl: 'https://cn.vuejs.org/v2/api/#',
+        //         }
+        //     ]
+        // }],
     ]
 }
