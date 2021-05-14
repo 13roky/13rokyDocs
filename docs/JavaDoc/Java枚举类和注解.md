@@ -1,6 +1,6 @@
 # Java枚举类与注解
 
-[toc]
+[[toc]]
 
 ## 一、枚举类
 
@@ -640,11 +640,48 @@ String name ="13roky"
 
 **JDK8 之前重复注解的实现：**
 
-JDK8 之前如果要同一位置加多个相同注解，需要使用数组来添加
+JDK8 之前如果要同一位置加多个相同注解，需要使用数组来添加。
+
+```java
+package com.broky.EnumClass;
+
+import java.lang.annotation.*;
+
+import static java.lang.annotation.ElementType.*;
+
+/**
+ * @author 13roky
+ * @date 2021-05-14 8:36
+ */
+
+@Retention(RetentionPolicy.SOURCE)
+@Target({FIELD, METHOD})
+public @interface MyAnnotation {
+    String[] value();
+}
+```
+
+```java
+package com.broky.EnumClass;
+
+/**
+ * @author 13roky
+ * @date 2021-05-14 8:16
+ */
+public class AnnotationTest {
+    @MyAnnotation({"123","456"})
+    void test(){
+
+    }
+}
+```
 
 
 
 **JKD8 新特性：可重复注解：**
+
+- 在 MyAnnotation 上声明 @Repeatable，成员值为 Annotations.class
+- MyAnnotation 的 Targe , Inherited 和 Retention 与Annotations相同。
 
 **Demo：**
 
@@ -705,4 +742,58 @@ public @interface MyAnnotations {
 }
 
 ```
+
+
+
+## 	⑦ JDK8 新特性：类型注解
+
+> 可以理解为，类型注解就是对元注解@Target，新增的两个参数类型
+>
+> TYPE_PARAMETER, TYPE_USE
+
+
+
+**说明：**
+
+- 在Java 8之前，注解只能是在声明的地方所使用，Java8开始，**注解可以应用 在任何地方**。
+  - **ElementType.TYPE_PARAMETER** 表示该注解能写在类型变量的声明语 句中（如：泛型声明）。
+  - **ElementType.TYPE_USE** 表示该注解能写在使用类型的任何语句中。
+
+
+
+**Demo:**
+
+```java
+// 在自定义注解的@Target中加入参数TYPE_PARAMETER
+class Generic<@MyAnnotation T>{
+    // 在自定义注解的@Target中加入参数TYPE_USE
+    public void show() throws @MyAnnotation RuntimeException{
+        ArrayList<@MyAnnotation String> list = new ArrayList<>();
+
+        int num = (@MyAnnotation int) 10L;
+    }
+}
+```
+
+```java
+package com.broky.EnumClass;
+
+import java.lang.annotation.*;
+
+import static java.lang.annotation.ElementType.*;
+
+/**
+ * @author 13roky
+ * @date 2021-05-14 8:36
+ */
+
+@Repeatable(MyAnnotations.class)
+@Retention(RetentionPolicy.SOURCE)
+@Target({FIELD, METHOD, TYPE_PARAMETER,TYPE_USE})
+public @interface MyAnnotation {
+    String value() default "test";
+}
+```
+
+
 
