@@ -22,6 +22,12 @@ module.exports = {
                     { text: 'Google', link: 'https://google.com' },
                 ],
             },
+            {
+                text: 'API文档', items: [
+                    { text: 'JDK 11', link: 'https://www.apiref.com/java11-zh/index.html' },
+                    { text: '更多API文档', link: 'https://www.apiref.com' },
+                ],
+            },
 
             {
                 text: '更多文档',
