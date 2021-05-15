@@ -3,6 +3,14 @@
 # 确保脚本抛出遇到的错误
 set -e
 
+# 上传代码
+git add .
+git commit -m 'update'
+git push -f git@github.com:13roky/13rokyDocs.git master
+git push -f git@gitee.com:broky-dev/vuepress_test.git master
+
+
+
 # 生成静态文件
 npm run docs:build
 
@@ -14,7 +22,8 @@ cd docs/.vuepress/dist
 
 git init
 git add -A
-git commit -m 'deploy'
+git commit -m 'update'
+
 
 # 如果发布到 https://<USERNAME>.github.io
 # git push -f git@github.com:<USERNAME>/<USERNAME>.github.io.git master

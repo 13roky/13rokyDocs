@@ -24,7 +24,8 @@ module.exports = {
             },
             {
                 text: 'API文档', items: [
-                    { text: 'JDK 11', link: 'https://www.apiref.com/java11-zh/index.html' },
+                    { text: 'JDK 11中文', link: 'https://www.apiref.com/java11-zh/index.html' },
+                    { text: 'JDK 11', link: 'https://docs.oracle.com/en/java/javase/11/docs/api/index.html' },
                     { text: '更多API文档', link: 'https://www.apiref.com' },
                 ],
             },
