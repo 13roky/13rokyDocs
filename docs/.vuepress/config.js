@@ -63,6 +63,8 @@ module.exports = {
                         { title: 'Java多线程', path: 'Java多线程' },
                         { title: 'Java常用类', path: 'Java常用类' },
                         { title: 'Java枚举类和注解', path: 'Java枚举类和注解' },
+                        { title: 'Java集合', path: 'Java集合' },
+                        { title: 'test', path: 'Java多线程1' },
                     ]
                 }
             ],
