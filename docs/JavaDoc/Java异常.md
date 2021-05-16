@@ -34,6 +34,8 @@
 
 ### 2.3. 常见异常的运行Demo
 
+::: details 点击查看 demo
+
 ```java
 package com.broky.exception.commonException;
 
@@ -107,6 +109,8 @@ public class CommonEx {
 
 ```
 
+:::
+
 ## 3. 异常的抓抛模型原理
 
 - **异常的抛出**：如果程序在运行过程中执行某段代码时发生了异常，那么系统（JVM）将会根据异常的类型，在异常代码处创建对应的异常类型的对象并抛出，抛出给程序的调用者。一旦抛出对象以后,其后的代码不再运行,程序终止.  
@@ -131,6 +135,8 @@ public class CommonEx {
 - 体会1：使用try-catch-finally处理编译时异常，是让程序在编译时就不再报错，但是运行时仍然有可能报错。相当于我们使用try-catch将一个编译时可能出现的异常，延迟到运行时出现。p376
 - 体会2：在开发中，运行时异常比较常见，此时一般不用try-catch去处理，因为处理和不处理都是一个报错，最好办法是去修改代码。针对编译时异常，我们一定要考虑异常处理。
 
+::: details 点击查看 demo
+
 ```java
         package com.broky.exception.demo02;
 
@@ -151,6 +157,7 @@ public class TryCatchFinally {
 }
 ```
 
+:::
 
 ### 4.2. throws + 异常类型
 
@@ -165,6 +172,9 @@ public class TryCatchFinally {
 
 
 注意: 将异常向上抛出也算是一种处理异常的方法
+
+::: details 点击查看 demo
+
 ```java
 package com.broky.exception;
 
@@ -191,11 +201,15 @@ public class ThrowsEx {
 }
 ```
 
+:::
+
 ## 5. 重写方法异常抛出的规则
 
 1. 子类重写的方法抛出的异常类型不大于父类被重写的方法抛出的异常类型  
 
 下面代码中,main方法中向display方法中传入了SuperClass的子类对象.那么到display方法中调用s.method调用的就是SpuerClass的子类SubClass重写的method方法, 如果这个方法抛出的异常范围大于父类SuperClass所抛出的异常的话,那么在display方法中对异常的catch处理就会catch不到这个异常.
+
+::: details 点击查看 demo
 
 ```java
 package com.broky.exception;
@@ -231,7 +245,10 @@ class SubClass extends SuperClass {
 }
 ```
 
+:::
+
 ## 6. 开发中如何选择使用try-catch-finally 还是throws?
+
 - 如果分类中被重写的方法没有throws方式处理异常,则子类重写的方法也不能使用throws,意味着如果子类重写的方法中有异常,必须使用tyr-catch-finally方式处理.
 - 执行的方法中,先后又调用了另外的几个方法,这几个方法是递进关系执行的.我们建议这几个方法使用throws的方式处理.而执行的方法a可以考虑使用try-catch-finally方式进行处理.  
 因为如果在a方法要调用d方法时,如果在b方法内try-catch,当b方法异常时,并不会给方法a返回所需要的数据.因此最好使用throws将异常集合到一块再处理.
@@ -246,6 +263,8 @@ class SubClass extends SuperClass {
 抛出编译时异常时, 必须要处理抛出的这个异常.
 
 详细解析请看下面的代码
+
+::: details 点击查看 demo
 
 ```java
 package com.broky.exception;
@@ -298,11 +317,15 @@ public class ThrowEx {
 
 ```
 
+:::
+
 ## 8. 自定义异常类
 
 1. 继承现有的异常结构：RuntimeExceptiona（不用处理）、Exception（需要处理）
 2. 提供全局常量：serialVersionUID
 3. 提供重载的构造器
+
+::: details 点击查看 demo
 
 ```java
 package com.broky.exception;
@@ -325,8 +348,13 @@ public class MyException extends RuntimeException{
     }
 }
 ```
+:::
+
 ## 9. 异常处理练习题
+
 ### 9.1. 判断以下代码的输出内容
+
+::: details 点击查看 demo
 
 ```java
 package com.broky.exception.practice;
@@ -370,7 +398,10 @@ public class ExceptionTest {
     用B方法的finally
 */
 ```
+:::
+
 **解析debug中的运行步骤：**
+
 1. methodA();
 2. System.out.println("运行A方法");
 3. throw new RuntimeException("A方法手动抛出运行时异常"); **//此处抛出了异常但是由于还在方法A的运行还没有结束所以main中并没有进行到catch环节，但是方法中的finally又必须运行，这样一来方法中的finally必然在main中catch环节的前面**
@@ -388,6 +419,8 @@ public class ExceptionTest {
 3. 在程序中,自定义对应输入负数的异常类( EcDef)。
 4. 运行时接受参数 `java EcmDef 20 10`∥args[0]=“20“ args[1]=”10“ I
 5. nterger类的 static方法 parseInt( String s)将s转换成对应的int值
+
+::: details 点击查看 demo
 
 ```java
 package com.broky.exception.practice;
@@ -441,3 +474,5 @@ public class EcmDef {
     }
 }
 ```
+
+:::
